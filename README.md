@@ -53,8 +53,7 @@
 | :--- | :--- |
 | **Realtime Obfuscation** | Scrambles source code on-the-fly to kill static detection. |
 | **Advanced Anti-VM** | 12+ methods to detect and terminate in sandboxes or virtual machines. |
-| **Persistence (Startup)** | Hooks into `SchTask`, RegEdit, or Startup Folders for permanent infection. |
-| **File Pumper** | Bloats file size to bypass automatic cloud scanners and heuristics. |
+| **Persistence (Startup)** | Hooks into RegEdit for permanent infection. |
 | **Identity Mask** | Professional Icon Changer to disguise the payload as legitimate software. |
 
 ---
@@ -83,15 +82,6 @@
 
 ---
 
-## 📝 Future Updates (To-Do)
-
-- [ ] Yandex Browser Infiltration
-- [ ] Hidden Webcam Capture
-- [ ] Remote Audio Recording (Spyware)
-- [ ] Background Crypto Miner
-- [ ] YouTube Session Stealer & Hijacker
-
----
 
 ## ⚠️ Disclaimer
 
@@ -106,5 +96,5 @@
 - **USDT (Tron)**: `TGRk3pvcWvoKrXMDATPrVstQHa9c9hqhHQ`
 
 <div align="center">
-  <i>Maintained by badhappens</i>
+  <i>Upgraded by badhappens</i>
 </div>

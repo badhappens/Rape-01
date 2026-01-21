@@ -1,7 +1,7 @@
 <div align="center">
   <h1 align="center">🩸 Rape Stealer🩸 </h1>
   <p align="center">
-    <strong>A high-performance, aggressive data extraction and system infiltration tool.</strong>
+    <strong>An updated and upgraded version of Exela.</strong>
   </p>
   
   <p align="center">
@@ -106,5 +106,5 @@
 - **USDT (Tron)**: `TGRk3pvcWvoKrXMDATPrVstQHa9c9hqhHQ`
 
 <div align="center">
-  <i>Maintained by Quicaxd</i>
+  <i>Maintained by badhappens</i>
 </div>

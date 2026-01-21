@@ -77,14 +77,19 @@
 
 <div align="center">
   <!-- 1. satır -->
-  <img src="https://i.hizliresim.com/q883jvy.png" style="height:250px; width:auto;">
-  <img src="https://i.hizliresim.com/f3kjitk.png" style="height:400px; width:auto;">
+  <img src="https://i.hizliresim.com/q883jvy.png"
+       style="height:250px; max-width:45%; display:inline-block;">
+  <img src="https://i.hizliresim.com/f3kjitk.png"
+       style="height:400px; max-width:45%; display:inline-block;">
   <br>
 
   <!-- 2. satır -->
-  <img src="https://i.hizliresim.com/idfjlx5.png" style="height:250px; width:auto;">
-  <img src="https://i.hizliresim.com/bjzv1lh.png" style="height:400px; width:auto;">
+  <img src="https://i.hizliresim.com/idfjlx5.png"
+       style="height:250px; max-width:45%; display:inline-block;">
+  <img src="https://i.hizliresim.com/bjzv1lh.png"
+       style="height:400px; max-width:45%; display:inline-block;">
 </div>
+
 
 
 ---

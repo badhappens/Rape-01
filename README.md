@@ -1,17 +1,17 @@
 <div align="center">
-  <h1 align="center">🔞 Rape Stealer 🔞</h1>
+  <h1 align="center">🩸 Rape Stealer🩸 </h1>
   <p align="center">
     <strong>A high-performance, aggressive data extraction and system infiltration tool.</strong>
   </p>
   
   <p align="center">
-    <img src="https://img.shields.io/badge/Python-3.11-blue?style=for-the-badge&logo=python" alt="Python 3.11">
+    <img src="https://img.shields.io/badge/Python-3.10-blue?style=for-the-badge&logo=python" alt="Python 3.11">
     <img src="https://img.shields.io/badge/Platform-Windows-00a2ed?style=for-the-badge&logo=windows" alt="Windows">
     <img src="https://img.shields.io/badge/Infection-Active-red?style=for-the-badge" alt="Status Active">
   </p>
 
   <p align="center">
-    <a href="https://t.me/quicaxd"><strong>Contact Developer (Telegram)</strong></a>
+    <a href="https://t.me/Klaver5828"><strong>Contact Developer (Telegram)</strong></a>
     <br />
     <br />
     <a href="#features">Malicious Features</a>

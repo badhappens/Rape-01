@@ -1,93 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rape - Advanced Data Extraction Tool</title>
-    <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 900px; margin: 0 auto; padding: 20px; }
-        h1, h2 { color: #2c3e50; border-bottom: 2px solid #eee; padding-bottom: 10px; }
-        code { background: #f4f4f4; padding: 2px 5px; border-radius: 4px; }
-        .feature-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; list-style: none; padding: 0; }
-        .screenshot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
-        .screenshot-grid img { width: 100%; border-radius: 8px; border: 1px solid #ddd; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        .warning { background: #fff3cd; border-left: 5px solid #ffeeba; padding: 15px; margin: 20px 0; }
-        a { color: #3498db; text-decoration: none; }
-        a:hover { text-decoration: underline; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+
 <body>
 
-<h1 id="rape-project">Rape Project</h1>
-<p>
-    <strong>Rape</strong> is an industry-leading, high-performance data recovery and extraction utility designed for comprehensive system analysis. 
-    Stay updated via our official channel: <br>
-    🚀 <a href="https://t.me/RapeStealer">Telegram Channel</a> - Join for updates and community support.
+<h1 id="rape-stealer">Rape Stealer</h1>
+<p>Rape Stealer, a powerful and feature-rich tool, offers the following functionalities:<br>
+   <a href="https://t.me/RapeBrand">Telegram Adress</a> - Join our Telegram channel for the latest developments
 </p>
-
-<hr>
 
 <h2>Table of Contents</h2>
 <ul>
-    <li><a href="#features">Core Features</a></li>
-    <li><a href="#builder-settings">Advanced Builder Options</a></li>
-    <li><a href="#how-to-build">Installation Guide</a></li>
-    <li><a href="#screenshots">Visual Interface</a></li>
-    <li><a href="#disclaimer">Legal Disclaimer</a></li>
+  <li><a href="#features">Features</a></li>
+  <li><a href="#builder-settings">Builder Settings</a></li>
+  <li><a href="#how-to-build">How to Build</a></li>
+  <li><a href="#disclaimer">Disclaimer</a></li>
+  <li><a href="#support-the-project">Support the Project</a></li>
+  <li><a href="#screenshots">Screenshots</a></li>
 </ul>
 
-<h2 id="features">Core Features ⚡</h2>
-<ul class="feature-list">
-    <li>🛡️ <strong>Anti-Spam Mutex:</strong> Prevents multiple instances.</li>
-    <li>🔑 <strong>Credential Recovery:</strong> Extract saved browser passwords.</li>
-    <li>🌐 <strong>Social Session Hijack:</strong> Telegram, Instagram, Twitter, and TikTok.</li>
-    <li>🎮 <strong>Gaming Profiles:</strong> Riot Games, Steam, Roblox, and Epic Games.</li>
-    <li>💰 <strong>Crypto Wallet Hunter:</strong> Scans for local wallet data.</li>
-    <li>📡 <strong>Network Discovery:</strong> Recovers saved WiFi profiles.</li>
-    <li>📸 <strong>Visual Capture:</strong> Full multi-monitor screenshots.</li>
-    <li>💉 <strong>Discord Injection:</strong> Real-time token and login capture.</li>
-    <li>📂 <strong>System Metadata:</strong> Deep system info and process logging.</li>
-    <li>📋 <strong>ClipLogger:</strong> Real-time clipboard text monitoring.</li>
-</ul>
-
-<h2 id="builder-settings">Advanced Builder Options 🔧</h2>
-<p>The <strong>Rape Builder</strong> includes several stealth and optimization layers:</p>
+<h2 id="features">Features 🚀</h2>
 <ul>
-    <li>🌀 <strong>Dynamic Obfuscation:</strong> Polymorphic code structure to bypass static analysis.</li>
-    <li>🎈 <strong>File Pumper:</strong> Increase file size to bypass certain gateway scanners.</li>
-    <li>🏠 <strong>Persistence Modules:</strong> Options for Schtask, Registry, or Startup folder integration.</li>
-    <li>🎭 <strong>Identity Mask:</strong> Custom Icon and Assembly information changer.</li>
-    <li>🚫 <strong>Enhanced Anti-VM:</strong> 12+ sophisticated checks for sandbox evasion.</li>
+  <li>📄 <strong>Fake Error</strong> - Create fake error messages.</li>
+  <li>📷 <strong>Capture Screenshot</strong> - Capture screenshot from all monitors.</li>
+  <li>📶 <strong>WiFi Stealer</strong> - Extract wifi profiles & passwords.</li>
+  <li>🔒 <strong>Create Mutex</strong> (Anti Spam) - Prevent spamming.</li>
+  <li>📞 <strong>Discord Injection</strong> - Send token, password, and email on login or password change.</li>
+  <li>🔑 <strong>Password Stealer</strong> - Steals Browser passwords.</li>
+  <li>💳 <strong>Credit Card Stealer</strong> - Steals Browser Cards.</li>
+  <li>🍪 <strong>Cookie Stealer</strong> - Steals Browser cookies.</li>
+  <li>💰 <strong>Crypto & Wallet Stealer</strong> - Steals cryptocurrency and wallet information.</li>
+  <li>🍪 <strong>AutoFill Stealer</strong> - Steals Browser autofill data.</li>
+  <li>📱 <strong>Telegram Session Stealer</strong> - Steals Telegram session files.</li>
+  <li>🎮 <strong>Uplay Session Stealer</strong> - Steals Uplay session files.</li>
+  <li>🎮 <strong>Epic Session Stealer</strong> - Steals Epic session files.</li>
+  <li>🎮 <strong>Growtopia Session Stealer</strong> - Steals Growtopia `save.dat`.</li>
+  <li>🔖 <strong>Bookmark Stealer</strong> - Steals Browser bookmarks.</li>
+  <li>⏳ <strong>History Stealer</strong> - Steals Browser history.</li>
+  <li>💾 <strong>Downloads Stealer</strong> - Steals downloaded files.</li>
+  <li>📷 <strong>Instagram Session Stealer & Validator</strong> - Steals and validate Instagram sessions.</li>
+  <li>🐦 <strong>Twitter Session Stealer & Validator</strong> - Steals and validate Twitter sessions.</li>
+  <li>🎵 <strong>Tiktok Session Stealer & Validator</strong> - Steals and validate Tiktok sessions.</li>
+  <li>📺 <strong>Twitch Session Stealer & Validator</strong> - Steals and validate Twitch sessions.</li>
+  <li>🎶 <strong>Spotify Session Stealer & Validator</strong> - Steals and validate Spotify sessions.</li>
+  <li>🎮 <strong>Riot Games Session Stealer & Validator</strong> - Steals and validate Riot Games sessions (valorant and lol).</li>
+  <li>💬 <strong>Reddit Session Stealer & Validator</strong> - Steals and validate Reddit sessions.</li>
+  <li>🎮 <strong>Roblox Session Stealer & Validator</strong> - Steals and validate Roblox sessions.</li>
+  <li>🎮 <strong>Steam Session Stealer & Validator</strong> - Steals and validate Steam sessions.</li>
+  <li>🎮 <strong>Growtopia save.dat Stealer</strong> - Steals Growtopia save.dat.</li>
+  <li>📞 <strong>Discord Token Stealer</strong> - Steals Discord tokens.</li>
+  <li>💻 <strong>System Info Stealer</strong> - Steals system information.</li>
+  <li>📋 <strong>Last Clipboard Text</strong> - Steals the last clipboard text.</li>
+  <li>💻 <strong>Process Stealer</strong> - Steals running processes.</li>
 </ul>
 
-<h2 id="how-to-build">Installation Guide 🛠️</h2>
+<h2 id="builder-settings">Builder Settings 🔧</h2>
+<p>Rape Stealer's builder provides the following options:</p>
+<ul>
+  <li>🔀 <strong>Realtime Obfuscation</strong> - Applies real-time obfuscation techniques.</li>
+  <li>💾 <strong>File Pumper</strong> (Optional) - Pump your file size to evade detection.</li>
+  <li>🚀 <strong>Startup Methods</strong> (Optional) - Use from schtask or regedit or folder startup options for startup.</li>
+  <li>🎨 <strong>Icon Changer</strong> (Optional) - Changes the program icon (must end in .ico).</li>
+  <li>🚫 <strong>Anti-VM</strong> (Optional) - It uses 12 different Anti-VM methods for enhanced security.</li>
+</ul>
+
+<h2 id="how-to-build">How to Build 🛠️</h2>
+<p>To set up Rape Stealer, follow these steps:</p>
 <ol>
-    <li>Install the required environment: <a href="https://www.python.org/ftp/python/3.10.0/python-3.10.0-amd64.exe">Python 3.10.0</a>.</li>
-    <li>Download the <strong>Rape</strong> source code from the official repository.</li>
-    <li>Extract the archive using a standard unzip utility.</li>
-    <li>Run <code>install.bat</code> within the main directory to initialize dependencies.</li>
-    <li>Configure your webhook and build your customized executable.</li>
+  <li>⬇️ Download and Install <a href="https://www.python.org/ftp/python/3.11.0/python-3.11.0-amd64.exe">python 3.11.0</a></li>
+  <li>⬇️ <a href="#">Download Rape Stealer</a></li>
+  <li>⬇️ <a href="https://www.pcworld.com/article/394871/how-to-unzip-files-in-windows-10.html">Extract</a> the zip file.</li>
+  <li>👉 Navigate to the Rape Stealer folder and double click <code>install.bat</code>.</li>
+  <li>🚀 Follow the on-screen instructions to complete the setup.</li>
 </ol>
 
-<div class="warning" id="disclaimer">
-    <strong>⚠️ Disclaimer:</strong> This software (Rape) is strictly for educational purposes, security auditing, and authorized sandbox testing. The developers assume no liability for misuse or damage caused by this tool. By using Rape, you agree to all local and international cyber laws.
-</div>
+<h2 id="todo">Todo 📝</h2>
+<p>- Yandex Stealer<br>- Take Webcamshot<br>- Record Audio<br>- Mining<br>- Youtube Session stealer & validator</p>
 
-<h2 id="screenshots">Visual Interface 📸</h2>
-<div class="screenshot-grid">
-    <img src="https://i.hizliresim.com/q883jvy.png" alt="Rape Dashboard 1">
-    <img src="https://i.hizliresim.com/kswcxp0.png" alt="Rape Builder 2">
-    <img src="https://i.hizliresim.com/idfjlx5.png" alt="Rape Options 3">
-    <img src="https://i.hizliresim.com/bjzv1lh.png" alt="Rape Logs 4">
-</div>
+<h2 id="additional">Additional ℹ️</h2>
+<p>- Sends all files to your Discord webhook in beautiful embeds and a structured zip file<br>- Anti-Debug</p>
 
-<h2 id="support">Support & Development</h2>
-<p>For bug reports or feature requests, contact the lead developer via <a href="https://t.me/Klaver5828">Telegram</a>.</p>
+<h2 id="disclaimer">Disclaimer ⚠️</h2>
+<p>- This software was developed for personal training and sandbox testing. The developer of the software is not responsible in any way for its misuse. By downloading or using this program, you acknowledge that you are solely responsible for any consequences that may result from the use of this program.</p>
+
+<h2 id="notes">Note's 📢</h2>
+<p>- If you have any issues or need support with this project, you can contact me via <a href="https://t.me/quicaxd">Telegram</a> 💬</p>
+
+<h2 id="support-the-project">Support the Project</h2>
+<p>If you find this project useful and would like to show your support, you can make a donation using the following cryptocurrencies:</p>
 <ul>
-    <li><strong>BTC:</strong> <code>bc1qy8r6ck0c5nqcyhgnhvlpc0drjp9c2lergjqy5d</code></li>
-    <li><strong>ETH:</strong> <code>0x6285dCe8F35d7f31FBf41a648CC35212caF690B1</code></li>
-    <li><strong>USDT (TRC20):</strong> <code>TGRk3pvcWvoKrXMDATPrVstQHa9c9hqhHQ</code></li>
+  <li><strong>Bitcoin (BTC):</strong> Wallet Address: bc1qy8r6ck0c5nqcyhgnhvlpc0drjp9c2lergjqy5d</li>
+  <li><strong>Ethereum (ETH):</strong> Wallet Address: 0x6285dCe8F35d7f31FBf41a648CC35212caF690B1</li>
+  <li><strong>USDT (Tron network):</strong> Wallet Address: TGRk3pvcWvoKrXMDATPrVstQHa9c9hqhHQ</li>
 </ul>
+
+<h2 id="screenshots">Screenshots 📸</h2>
+<img src="https://i.hizliresim.com/q883jvy.png" alt="Application Screenshot" width="800">
+<img src="https://i.hizliresim.com/kswcxp0.png" alt="Application Screenshot" width="800">
+<img src="https://i.hizliresim.com/idfjlx5.png" alt="Application Screenshot" width="800">
+<img src="https://i.hizliresim.com/bjzv1lh.png" alt="Application Screenshot" width="800">
 
 </body>
 </html>

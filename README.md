@@ -12,8 +12,6 @@
 
   <p align="center">
     <a href="https://t.me/Klaver5828"><strong>Contact Developer (Telegram)</strong></a>
-    <br />
-    <br />
   </p>
 </div>
 

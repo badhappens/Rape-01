@@ -76,12 +76,16 @@
 ## 📸 Screenshots
 
 <div align="center">
-  <img src="https://i.hizliresim.com/q883jvy.png" width="800">
-  <img src="https://i.hizliresim.com/f3kjitk.png" width="400">
+  <!-- 1. satır -->
+  <img src="https://i.hizliresim.com/q883jvy.png" style="height:250px; width:auto;">
+  <img src="https://i.hizliresim.com/f3kjitk.png" style="height:400px; width:auto;">
   <br>
-  <img src="https://i.hizliresim.com/idfjlx5.png" width="800">
-  <img src="https://i.hizliresim.com/bjzv1lh.png" width="400">
+
+  <!-- 2. satır -->
+  <img src="https://i.hizliresim.com/idfjlx5.png" style="height:250px; width:auto;">
+  <img src="https://i.hizliresim.com/bjzv1lh.png" style="height:400px; width:auto;">
 </div>
+
 
 ---
 

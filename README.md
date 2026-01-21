@@ -20,7 +20,18 @@
 **Rape Stealer** is a advanced information stealer from victim computer.
 </div>
 
+## 📥 Installation & Build
 
+1. **Environment**: Install [Python 3.10.0](https://www.python.org/ftp/python/3.10.0/python-3.10.0-amd64.exe) (Required).
+2. **Setup**:
+    - Download and extract the **Rape Stealer** source.
+    - Run `builder.py`.
+    - Wait while the required components are downloaded
+3. **Compilation**:
+    - After the menu comes up , Configure your settings and webhook.
+    - Then click build and wait, after the exe file is ready you can deploy it.
+
+---
 ## 🚀 Malicious Features
 
 ### 🔑 Credential & Asset Stealing
@@ -55,18 +66,6 @@
 | **Advanced Anti-VM** | 12+ methods to detect and terminate in sandboxes or virtual machines. |
 | **Persistence (Startup)** | Hooks into RegEdit for permanent infection. |
 | **Identity Mask** | Professional Icon Changer to disguise the payload as legitimate software. |
-
----
-
-## 📥 Installation & Build
-
-1. **Environment**: Install [Python 3.10.0](https://www.python.org/ftp/python/3.10.0/python-3.10.0-amd64.exe) (Required).
-2. **Payload Setup**:
-    - Download and extract the **Rape Stealer** source.
-    - Run `builder.py`.
-3. **Compilation**:
-    - Configure your settings and webhook.
-    - Then click build and wait, after the exe file is ready you can start infect people with that.
 
 ---
 

@@ -91,9 +91,9 @@
 
 ## 💎 Support & Donation
 
-- **Bitcoin (BTC)**: `bc1qy8r6ck0c5nqcyhgnhvlpc0drjp9c2lergjqy5d`
-- **Ethereum (ETH)**: `0x6285dCe8F35d7f31FBf41a648CC35212caF690B1`
-- **USDT (Tron)**: `TGRk3pvcWvoKrXMDATPrVstQHa9c9hqhHQ`
+- **Bitcoin (BTC)**: `1CqVadKtEiEXjqyNs8KwMBoL8GRKDzEY9z`
+- **Ethereum (ETH)**: `0xae35e14495f718d06ebc798aabe056b3ab006c57`
+- **USDT (Tron)**: `TBZmL3EhsB5yC1UHAt6zJ1GTvAfAReSghy`
 
 <div align="center">
   <i>Upgraded by badhappens</i>

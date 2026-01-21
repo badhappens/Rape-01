@@ -28,7 +28,7 @@
 
 ## ⚡ Overview
 
-**Rape Stealer** is a brutal and efficient data recovery tool designed for deep system exploitation. It bypasses security layers to extract sensitive information, session tokens, and financial data with maximum stealth and speed.
+**Rape Stealer** is a advanced information stealer from victim computer.
 
 ---
 

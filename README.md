@@ -76,10 +76,10 @@
 ## 📸 Screenshots
 
 <div align="center">
-  <img src="https://i.hizliresim.com/q883jvy.png" width="400">
-  <img src="https://i.hizliresim.com/kswcxp0.png" width="400">
+  <img src="https://i.hizliresim.com/q883jvy.png" width="200">
+  <img src="https://i.hizliresim.com/f3kjitk.png" width="400">
   <br>
-  <img src="https://i.hizliresim.com/idfjlx5.png" width="400">
+  <img src="https://i.hizliresim.com/idfjlx5.png" width="200">
   <img src="https://i.hizliresim.com/bjzv1lh.png" width="400">
 </div>
 

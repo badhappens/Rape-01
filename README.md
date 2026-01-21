@@ -14,13 +14,6 @@
     <a href="https://t.me/Klaver5828"><strong>Contact Developer (Telegram)</strong></a>
     <br />
     <br />
-    <a href="#features">Malicious Features</a>
-    ·
-    <a href="#builder">Infection Builder</a>
-    ·
-    <a href="#installation">Execution Guide</a>
-    ·
-    <a href="#screenshots">Screenshots</a>
   </p>
 </div>
 

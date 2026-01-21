@@ -13,11 +13,12 @@
   <p align="center">
     <a href="https://t.me/Klaver5828"><strong>Contact Developer (Telegram)</strong></a>
   </p>
-</div>
+
 ## ⚡ Overview
 
-**Rape Stealer** is a advanced information stealer from victim computer.
 
+**Rape Stealer** is a advanced information stealer from victim computer.
+</div>
 ---
 
 ## 🚀 Malicious Features

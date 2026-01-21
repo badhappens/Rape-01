@@ -42,6 +42,9 @@
 - **Social Media Infiltration**: Session stealer & validator for Instagram, Twitter, TikTok, Twitch, Reddit, and Spotify.
 - **Crypto Drainer**: Targets and steals data from cryptocurrency extensions and desktop wallet files.
 
+### 💰 Financial & Crypto Exploitation
+- **Crypto Clipper**: High-speed clipboard monitor that automatically replaces the target's crypto wallet addresses with your own. Supports BTC, ETH, LTC, TRX, and more.
+
 ### 💻 System & Surveillance
 - **Full Screenshot Capture**: Grabs high-quality captures from all connected monitors.
 - **WiFi Passwords**: Forcefully extracts all saved WiFi profiles and plain-text passwords.

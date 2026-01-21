@@ -19,7 +19,7 @@
 
 **Rape Stealer** is a advanced information stealer from victim computer.
 </div>
----
+
 
 ## 🚀 Malicious Features
 

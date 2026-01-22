@@ -175,7 +175,7 @@ class BuilderGUI(ctk.CTk):
         self.check_fake_error = ctk.CTkCheckBox(col2, text="Enable Fake Error", variable=self.var_fake_error)
         self.check_fake_error.pack(pady=10, anchor="w", padx=20)
 
-        self.check_startup = ctk.CTkCheckBox(col2, text="Run at Startup (Hidden)", variable=self.var_startup, command=self.toggle_startup)
+        self.check_startup = ctk.CTkCheckBox(col2, text="Run at Startup", variable=self.var_startup, command=self.toggle_startup)
         self.check_startup.pack(pady=10, anchor="w", padx=20)
         
         self.label_startup_warn = ctk.CTkLabel(col2, text="If this is selected, the application will request administrator permission.", text_color="orange", font=("Roboto", 10))

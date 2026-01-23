@@ -162,8 +162,10 @@ class BuilderGUI(ctk.CTk):
         self.check_steal_files = ctk.CTkCheckBox(col1, text="Enable File Stealer", variable=self.var_steal_files)
         self.check_steal_files.pack(pady=10, anchor="w", padx=20)
 
-        self.check_anti_vm = ctk.CTkCheckBox(col1, text="Enable Anti-VM", variable=self.var_anti_vm)
-        self.check_anti_vm.pack(pady=10, anchor="w", padx=20)
+        self.check_injection = ctk.CTkCheckBox(col1, text="Enable Discord Injection", variable=self.var_injection)
+        self.check_injection.pack(pady=10, anchor="w", padx=20)
+
+       
 
         
         # Column 2

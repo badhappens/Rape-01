@@ -165,12 +165,14 @@ class BuilderGUI(ctk.CTk):
         self.check_anti_vm = ctk.CTkCheckBox(col1, text="Enable Anti-VM", variable=self.var_anti_vm)
         self.check_anti_vm.pack(pady=10, anchor="w", padx=20)
 
-        self.check_injection = ctk.CTkCheckBox(col1, text="Enable Discord Injection", variable=self.var_injection)
-        self.check_injection.pack(pady=10, anchor="w", padx=20)
         
         # Column 2
         col2 = ctk.CTkFrame(self.switch_frame, fg_color="transparent")
         col2.pack(side="left", expand=True, fill="both")
+
+        
+        self.check_fake_error = ctk.CTkCheckBox(col2, text="Enable Fake Error", variable=self.var_fake_error)
+        self.check_fake_error.pack(pady=10, anchor="w", padx=20)
 
 
         self.check_startup = ctk.CTkCheckBox(col2, text="Run at Startup", variable=self.var_startup, command=self.toggle_startup)

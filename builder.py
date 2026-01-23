@@ -173,8 +173,7 @@ class BuilderGUI(ctk.CTk):
         col2.pack(side="left", expand=True, fill="both")
 
         
-        self.check_fake_error = ctk.CTkCheckBox(col2, text="Enable Fake Error", variable=self.var_fake_error)
-        self.check_fake_error.pack(pady=10, anchor="w", padx=20)
+       
 
 
         self.check_startup = ctk.CTkCheckBox(col2, text="Run at Startup", variable=self.var_startup, command=self.toggle_startup)

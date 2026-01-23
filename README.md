@@ -1,7 +1,7 @@
 <div align="center">
   <h1 align="center">🩸 Rape Stealer🩸 </h1>
   <p align="center">
-    <strong>Stealing all Cookies, Passwords, Cards, Accounts - Supporting all Browsers. Also has additional features like keylogger,crypto clipper etc - .</strong>
+    <strong>Stealing all Cookies, Passwords, Cards, Accounts - Supporting all Browsers. Also has additional features like keylogger,crypto clipper etc.</strong>
   </p>
   
   <p align="center">

@@ -180,9 +180,6 @@ class BuilderGUI(ctk.CTk):
         
         self.label_startup_warn = ctk.CTkLabel(col2, text="If this is selected, the application will request administrator permission.", text_color="orange", font=("Roboto", 10))
         self.label_startup_warn.pack(pady=0, anchor="w", padx=40)
-        
-        self.check_vmprotect = ctk.CTkCheckBox(col2, text="Pack with VMProtect?", variable=self.var_vmprotect)
-        self.check_vmprotect.pack(pady=10, anchor="w", padx=20)
 
         # Crypto Clipper Checkbox & Warning
         self.frame_clipper_toggle = ctk.CTkFrame(self.frame_general, border_width=1, border_color="black")

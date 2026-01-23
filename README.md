@@ -11,7 +11,7 @@
   </p>
 
   <p align="center">
-    <a href="https://t.me/Klaver5828"><strong>Contact Developer (Telegram)</strong></a>
+    <a href="https://t.me/RapeStealer"><strong>Contact Developer (Telegram)</strong></a>
   </p>
 </div>
 
